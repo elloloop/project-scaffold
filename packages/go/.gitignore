@@ -1,0 +1,6 @@
+# Generated fuzz corpus (seed corpus lives next to the FuzzXxx funcs as f.Add).
+**/testdata/fuzz/
+
+# Test/coverage artifacts
+*.out
+coverage.html

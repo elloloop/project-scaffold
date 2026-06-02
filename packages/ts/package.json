@@ -1,0 +1,18 @@
+{
+  "name": "@elloloop/shared-ts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./platform": "./dist/platform/index.js",
+    "./serverkit": "./dist/serverkit/index.js",
+    "./testkit": "./dist/testkit/index.js"
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --dir src"
+  }
+}

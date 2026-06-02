@@ -1,0 +1,198 @@
+version: 1
+style: google3-piper
+rules:
+  - organize services by product domain or platform capability
+  - organize workers by background capability or product workflow
+  - organize tools by developer or operational capability
+  - do not put language folders under services, workers, or tools
+  - put language-specific shared lanes only under packages/<language>
+  - organize shared language lanes around platform, serverkit, and testkit where applicable
+  - fix root causes instead of band-aids
+  - keep modules small, cohesive, dry, solid, and testable
+  - avoid hardcoded environment-specific values
+  - instantiate latest stable framework and runtime versions only after a project chooses a stack
+  - remove unused surfaces, domains, capabilities, frameworks, and shared language lanes during project setup
+  - do not preselect deployment tooling before a project chooses its runtime platform
+  - wire retained runtime surfaces into logs, metrics, traces, dashboards, and alerts
+review_gates:
+  required_lanes:
+    [
+      functional-correctness,
+      architecture-boundaries,
+      code-maintainability,
+      test-strategy,
+      security-privacy,
+      reliability-operations,
+      performance-scalability,
+      data-migrations,
+      product-surface-quality,
+    ]
+  branch_protection:
+    require_pull_request: true
+    require_code_owner_review: true
+    minimum_approvals: 2
+surfaces:
+  web:
+    path: apps/web
+    options: [react, angular, vue, svelte, solid, nextjs, remix, astro]
+    tests:
+      [
+        unit,
+        component,
+        integration,
+        e2e,
+        accessibility,
+        visual,
+        performance,
+        contract,
+        security,
+        smoke,
+        ssr-hydration,
+        cross-browser,
+        i18n,
+      ]
+  mobile:
+    path: apps/mobile
+    options: [flutter, react-native, android, ios, shared]
+    tests:
+      [
+        unit,
+        widget,
+        component,
+        navigation,
+        integration,
+        e2e,
+        accessibility,
+        performance,
+        snapshot,
+        golden,
+        contract,
+        device,
+        localization,
+        permissions,
+        offline-sync,
+        release-smoke,
+      ]
+  desktop:
+    path: apps/desktop
+    options: [electron, tauri, native]
+domains:
+  services:
+    path: services
+    examples:
+      [
+        identity,
+        billing,
+        notifications,
+        content,
+        search,
+        analytics,
+        integrations,
+        platform-gateway,
+      ]
+    tests:
+      [
+        unit,
+        handler,
+        contract,
+        schema,
+        integration,
+        database,
+        migration,
+        auth,
+        authorization,
+        rate-limit,
+        queue,
+        observability,
+        load,
+        security,
+        resilience,
+        smoke,
+        e2e,
+      ]
+  workers:
+    path: workers
+    examples:
+      [
+        email-delivery,
+        data-ingestion,
+        billing-reconciliation,
+        search-indexing,
+        scheduled-jobs,
+        ai-processing,
+      ]
+    tests:
+      [
+        unit,
+        contract,
+        integration,
+        idempotency,
+        retry,
+        backoff,
+        dead-letter,
+        ordering,
+        concurrency,
+        cancellation,
+        serialization,
+        observability,
+        load,
+        smoke,
+      ]
+  tools:
+    path: tools
+    examples:
+      [
+        developer-experience,
+        migrations,
+        release,
+        data-repair,
+        codegen,
+        observability,
+      ]
+    tests: [unit, parser, integration, golden, filesystem, snapshot, smoke]
+shared_packages:
+  lanes:
+    path: packages
+    languages: [go, ts, rust, java]
+    modules: [platform, serverkit, testkit]
+    tests: [unit, contract, compatibility, property, mutation]
+runtime:
+  local_dependencies:
+    path: docker-compose.yml
+    services: [postgres, redis, nats, minio, mailpit]
+  observability:
+    path: configs/observability
+    services: [otel-collector, prometheus, loki, tempo, grafana]
+    required_signals: [logs, metrics, traces, dashboards, alerts]
+    required_runtime_fields:
+      [
+        service.name,
+        deployment.environment,
+        service.version,
+        trace_id,
+        span_id,
+        request_id,
+      ]
+deployment:
+  path: infra
+  stance: provider-neutral
+  placeholders:
+    terraform:
+      path: infra/terraform
+      status: empty-structure
+      environments: [dev, staging, prod]
+      stacks: [platform, backend, web, observability]
+      modules: [network, compute, data, security, observability]
+      instantiate_only_when:
+        - project chooses Terraform
+        - target cloud or hosting platform is known
+        - state backend and secret strategy are known
+  required_contracts:
+    [
+      runtime_config,
+      health_check,
+      readiness_check,
+      metrics_or_otlp_export,
+      smoke_test,
+      rollback_plan,
+    ]

@@ -1,0 +1,24 @@
+groups:
+  - name: scaffold-local
+    rules:
+      - alert: TasksApiTargetDown
+        expr: up{job="tasks-api"} == 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Tasks API metrics target is down"
+          description: "Prometheus cannot scrape the local tasks API metrics endpoint."
+
+      - alert: HighHttpErrorRate
+        expr: |
+          sum(rate(http_requests_total{status=~"5.."}[5m]))
+          /
+          clamp_min(sum(rate(http_requests_total[5m])), 1)
+          > 0.05
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "HTTP 5xx rate is above 5%"
+          description: "Check logs and traces for the affected service."

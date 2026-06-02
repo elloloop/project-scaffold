@@ -1,0 +1,25 @@
+# Copy this file to .github/CODEOWNERS after creating real GitHub teams.
+# Do not leave placeholder teams in the active CODEOWNERS file.
+
+# Global maintainability and architecture review.
+* @elloloop/<project>-architecture @elloloop/<project>-maintainability
+
+# Backend services and workers.
+services/** @elloloop/<project>-backend @elloloop/<project>-reliability
+workers/** @elloloop/<project>-backend @elloloop/<project>-reliability
+
+# Shared package lanes.
+packages/go/** @elloloop/<project>-go
+packages/ts/** @elloloop/<project>-typescript
+packages/rust/** @elloloop/<project>-rust
+packages/java/** @elloloop/<project>-java
+
+# User surfaces.
+apps/web/** @elloloop/<project>-frontend @elloloop/<project>-product-quality
+apps/mobile/** @elloloop/<project>-mobile @elloloop/<project>-product-quality
+apps/desktop/** @elloloop/<project>-desktop @elloloop/<project>-product-quality
+
+# Security, data, release, and infrastructure.
+infra/** @elloloop/<project>-infra @elloloop/<project>-reliability
+configs/** @elloloop/<project>-security
+docs/** @elloloop/<project>-architecture

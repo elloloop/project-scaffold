@@ -1,0 +1,31 @@
+{
+  "name": "@elloloop/project-scaffold",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Opinionated Elloloop monorepo scaffold for apps, services, workers, CLIs, tools, and shared packages.",
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "doctor": "bash scripts/doctor.sh",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "lint": "turbo run lint",
+    "test": "make test",
+    "test:ts": "turbo run test",
+    "test:go": "make test-go",
+    "test:rust": "make test-rust",
+    "test:java": "make test-java"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "prettier": "^3.5.3",
+    "tsx": "^4.19.4",
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.0"
+  }
+}

@@ -1,0 +1,280 @@
+:root {
+  color: #18212f;
+  background: #eef2f5;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.shell {
+  width: min(980px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.auth-panel,
+.task-panel {
+  background: #ffffff;
+  border: 1px solid #d9e1e8;
+  border-radius: 8px;
+  box-shadow: 0 16px 36px rgba(28, 44, 64, 0.08);
+}
+
+.auth-panel {
+  width: min(420px, 100%);
+  padding: 28px;
+}
+
+.stack {
+  display: grid;
+  gap: 16px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.session {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #536172;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: #386b5f;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+.muted {
+  color: #667386;
+  margin: 6px 0 0;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  color: #435062;
+  font-weight: 650;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #cdd7e1;
+  border-radius: 7px;
+  padding: 11px 12px;
+  color: #17202e;
+  background: #fbfcfd;
+}
+
+input:focus {
+  border-color: #2f7f72;
+  outline: 3px solid rgba(47, 127, 114, 0.18);
+}
+
+.primary,
+.icon-button,
+.check-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.primary {
+  gap: 8px;
+  min-height: 42px;
+  border-radius: 7px;
+  padding: 0 16px;
+  color: #ffffff;
+  background: #256f64;
+  font-weight: 750;
+}
+
+.primary:hover:not(:disabled) {
+  background: #1d5b52;
+}
+
+.icon-button,
+.check-button {
+  width: 38px;
+  height: 38px;
+  border-radius: 7px;
+  color: #334155;
+  background: #edf2f6;
+}
+
+.icon-button:hover:not(:disabled),
+.check-button:hover:not(:disabled) {
+  background: #dfe8ef;
+}
+
+.danger {
+  color: #9f3434;
+}
+
+.notice {
+  margin: 14px 0 0;
+  border: 1px solid #efc9a9;
+  border-radius: 7px;
+  padding: 10px 12px;
+  color: #6f3f12;
+  background: #fff7ed;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.summary-grid > div {
+  min-height: 82px;
+  border: 1px solid #d9e1e8;
+  border-radius: 8px;
+  padding: 16px;
+  background: #ffffff;
+}
+
+.summary-label {
+  display: block;
+  color: #667386;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.summary-grid strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.7rem;
+}
+
+.task-panel {
+  padding: 18px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.task-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.task-list {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.task {
+  min-height: 54px;
+  display: grid;
+  grid-template-columns: 38px 1fr 38px;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #d9e1e8;
+  border-radius: 8px;
+  padding: 8px;
+  background: #fbfcfd;
+}
+
+.task span {
+  overflow-wrap: anywhere;
+}
+
+.task.done span {
+  color: #728096;
+  text-decoration: line-through;
+}
+
+@media (max-width: 640px) {
+  .shell {
+    width: min(100% - 20px, 980px);
+    padding: 20px 0;
+  }
+
+  .topbar,
+  .session {
+    align-items: flex-start;
+  }
+
+  .topbar {
+    flex-direction: column;
+  }
+
+  .summary-grid,
+  .task-form {
+    grid-template-columns: 1fr;
+  }
+
+  .primary {
+    width: 100%;
+  }
+}
